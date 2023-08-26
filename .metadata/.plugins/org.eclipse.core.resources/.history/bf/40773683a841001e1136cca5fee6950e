@@ -1,0 +1,49 @@
+package day6_chaining;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+import org.json.JSONObject;
+
+import com.github.javafaker.Faker;
+import com.github.scribejava.core.model.Response;
+
+
+
+public class create_user {
+
+	@Test
+	void CreateUser()
+	{
+		Faker fake=new Faker();
+		
+		JSONObject data= new JSONObject();		
+		
+		data.put("name",fake.name().fullName());
+		data.put("gender","male");
+		data.put("email",fake.internet().emailAddress());
+		data.put("status","Inactive");
+		
+		
+		String token="30410f3a63d21c3f4f2b76e58da93f83fdafba2eb03f651a2ced76c5745771e5";
+		
+		
+		
+		int id=given()
+		.headers("Authorization","bearer"+token)
+		.body(data.toString())
+		.contentType("application/json")
+		
+		
+		.when()
+		.post("https://gorest.co.in/public/v2/users")
+        .jsonPath().getInt("id"); 
+		
+		System.out.println("id is "+id);
+		
+		
+		
+		
+	}	
+	
+}

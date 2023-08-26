@@ -1,0 +1,34 @@
+package Day3;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+public class Query_Path_parameter {
+	
+	
+	
+//url used for api=https://reqres.in/users?page=2
+	@Test
+	void query&path_parameter() {
+		
+		given()
+		.pathParam(, DEFAULT_AUTH)
+		.queryParam("page","2")
+		
+		.when()
+		.get("https://reqres.in/api")
+		
+		.then()
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+
+}

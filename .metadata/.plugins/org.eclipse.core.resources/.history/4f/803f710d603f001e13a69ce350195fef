@@ -1,0 +1,32 @@
+package Day3;
+import org.testng.annotations.Test;
+
+import io.restassured.http.Headers;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+import java.util.Map;
+
+public class headers {
+	
+	void headers() {
+
+		Response res=given()
+		
+		
+		.when()
+		.get("https://www.google.com/");
+		Headers hvalue=res.headers();
+		System.out.println(hvalue);
+		
+		
+		
+		
+		
+		
+	}
+
+}

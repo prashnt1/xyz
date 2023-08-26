@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome4",
+    "definitions": {
+        "Welcome4": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "student": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Student"
+                    }
+                }
+            },
+            "required": [
+                "student"
+            ],
+            "title": "Welcome4"
+        },
+        "Student": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "Course": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "course": {
+                    "type": "string"
+                },
+                "empty": {
+                    "type": "boolean"
+                },
+                "mapType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Student"
+        }
+    }
+}

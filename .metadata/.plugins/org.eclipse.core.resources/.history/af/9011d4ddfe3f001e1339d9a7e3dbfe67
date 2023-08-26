@@ -1,0 +1,72 @@
+package Day4;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+import java.util.List;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.xml.XMLParser;
+
+import io.restassured.path.xml.XmlPath;
+import io.restassured.response.Response;
+
+
+public class ParsingXMLResponse {
+	
+	@Test
+void xmlbodyParsining()//// parsing xml without caapturining body
+
+	{
+		
+		given()
+		
+		.when()
+		.get("http://restapi.adequateshop.com/api/Traveler")
+
+		.then()
+		.statusCode(200)
+		.header("content-type","application/xml; charset=utf-8")
+		.log().all();
+	}
+	
+	
+	
+		@Test
+		void xmlparsing() {
+			
+			Response res=given()
+			
+			.when()
+			.get("http://restapi.adequateshop.com/api/Traveler");
+		Assert.assertEquals(res.getStatusCode(),200);
+		Assert.assertEquals(res.getHeader("content-type"), "application/xml; charset=utf-8");
+		
+		String page=res.xmlPath().get("TravelerinformationResponse.page").toString();
+		Assert.assertEquals(res.xmlPath().get("TravelerinformationResponse.travelers.Travelerinformation[0].name").toString(),"Developer");
+		
+		System.out.println(page);
+		
+		
+			
+			
+			
+		}
+		
+	@Test
+	void parsingxmluseingxmlpathclass() {
+		
+		Response res=given()
+		.when()
+		.get("http://restapi.adequateshop.com/api/Traveler");
+		
+		XmlPath xml=new XmlPath(res.asString());
+		
+		List<String> list=xml.getList("\"TravelerinformationResponse.travelers.Travelerinformation");
+		Assert.assertEquals(list.size(),10);
+	
+	
+}
+}
+

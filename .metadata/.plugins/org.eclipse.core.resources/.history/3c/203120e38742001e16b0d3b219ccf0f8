@@ -1,0 +1,93 @@
+package api.test;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
+
+import api.endpoints.Userendpoints;
+import api.payload.User;
+import io.restassured.response.Response;
+
+public class UserTests {
+	
+	
+	Faker faker;
+	User userpayload;
+	
+	@BeforeClass
+	public void setupData() {
+		
+		
+		faker=new Faker();
+		userpayload=new User();
+		
+		userpayload.setUserName(faker.name().username());
+		userpayload.setFirstName(faker.name().firstName());
+		userpayload.setLastName(faker.name().lastName());
+		userpayload.setEmail(faker.internet().emailAddress());
+		userpayload.setPhone(faker.phoneNumber().cellPhone());
+		userpayload.setPassword(faker.internet().password());
+		userpayload.setid(faker.number().hashCode());	
+		
+	}
+          
+	// we are runining our testes with testmethod from userendpoints class which contain testmethods and passing value of userpayload in it which is a object of our pojo class
+	
+	@Test(priority=1)
+	public void testpostuser() {
+		
+		Response response=Userendpoints.createUser(userpayload);
+		response.then().log().all();
+		
+		// validating status code and other test
+		
+		Assert.assertEquals(response.getStatusCode(),200);
+	}
+	
+		
+	@Test(priority=2)	
+	public void testreaduser() 
+	{
+	Response response =Userendpoints.readUser(this.userpayload.getuserName());
+		response.then().log().all();
+		response.getStatusCode();
+		Assert.assertEquals(response.getStatusCode(),200);
+
+		
+	}
+	@Test(priority=3)	
+	public void testupdateuser() {
+		
+		
+		userpayload.setFirstName(faker.name().firstName());
+		userpayload.setLastName(faker.name().lastName());
+		userpayload.setEmail(faker.internet().emailAddress());
+		
+		
+		Response response=Userendpoints.updateUser(this.userpayload.getuserName(),userpayload);
+		response.then().log().all();
+		Assert.assertEquals(response.getStatusCode(),200);
+
+		
+	}
+	
+	@Test(priority=4	)	
+	public void testdeleteuser() {
+		
+		Response response=Userendpoints.deleteUser(this.userpayload.getuserName());
+	
+		response.then().log().all();
+		response.getStatusCode();
+			Assert.assertEquals(response.getStatusCode(),200);	
+
+		
+	}
+	
+	
+	
+}
+	
+	
+

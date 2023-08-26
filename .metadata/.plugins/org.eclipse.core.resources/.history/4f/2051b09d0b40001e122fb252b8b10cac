@@ -1,0 +1,60 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1692612588.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"student"
+	],
+	"properties": {
+		"student": {
+			"$id": "#root/student", 
+			"title": "Student", 
+			"type": "array",
+			"default": [],
+			"items":{
+				"$id": "#root/student/items", 
+				"title": "Items", 
+				"type": "object",
+				"required": [
+					"Name",
+					"id",
+					"Course"
+				],
+				"properties": {
+					"Name": {
+						"$id": "#root/student/items/Name", 
+						"title": "Name", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"prashant"
+						],
+						"pattern": "^.*$"
+					},
+					"id": {
+						"$id": "#root/student/items/id", 
+						"title": "Id", 
+						"type": "integer",
+						"examples": [
+							1
+						],
+						"default": 0
+					},
+					"Course": {
+						"$id": "#root/student/items/Course", 
+						"title": "Course", 
+						"type": "string",
+						"default": "",
+						"examples": [
+							"science"
+						],
+						"pattern": "^.*$"
+					}
+				}
+			}
+
+		}
+	}
+}

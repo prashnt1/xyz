@@ -1,0 +1,43 @@
+package Day3;
+import org.testng.annotations.Test;
+
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+import java.util.Map;
+
+public class Cookies_Headers {
+	@Test
+	void Cookies() {
+		
+		Response res=given()
+		
+		
+		.when()
+		.get("https://www.google.com/");
+		 
+		Map <String,String> cvalues=res.getCookies();// capturing keys 
+		
+		 System.out.println(cvalues);  // printing value of key
+		 
+		 for(String k:cvalues.keySet()) /// extracting key from keyset 
+			 
+		 {
+			 
+			 String Cvalue=res.getCookie(k); // extracting key value by passing keyset from captured response cookies
+	                 System.out.println(Cvalue);	 
+		 }
+		 
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

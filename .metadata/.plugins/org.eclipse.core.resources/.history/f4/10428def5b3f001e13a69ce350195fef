@@ -1,0 +1,37 @@
+package Day3;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+public class Query_Path_parameter {
+	
+	
+	
+//url used for api=https://reqres.in/users?page=2
+	@Test
+	void query_path_parameter() {
+		
+		given()
+		.pathParam("path1","users")  //path parameter is a variable which store path value
+ 		.queryParam("page","2")   //Query parameter is a used to store exact Query ex. here is page 
+		
+		.when()
+
+		.get("https://reqres.in/api/{{path1}}")
+		
+		.then()
+		.statusCode(200)
+		.log().all();
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+
+}

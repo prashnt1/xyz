@@ -1,0 +1,40 @@
+package day2_differentMethod_to_send_requestBody;
+import org.json.JSONObject;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+import java.util.HashMap;
+
+
+
+// building Request body using org.json	 libraray
+public class Using_org_json {
+	
+
+	@Test
+	void response_bodyUsing_hashmap() {
+		
+		JSONObject data =new JSONObject();
+		data.put("name","dev");
+		data.put("course","aerocraft");
+		
+		
+		given()
+		.contentType("application/json")
+		.body(data.toString())
+		  
+			
+		.when()
+		.post("http://localhost:3000/student")
+        
+		.then()
+		.statusCode(201)
+		.body("name", equalTo ("dev"))
+		.log().all();
+		
+		
+	}
+
+}
